@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PPRACTICAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PRODUCTOS">
+          <Key>
+            <PropertyRef Name="SKU" />
+          </Key>
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SKU" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VALOR" Type="int" Nullable="false" />
+          <Property Name="TIENDA" Type="int" Nullable="false" />
+          <Property Name="IMAGEN" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIENDA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FECHADEAPERTURA" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PRODUCTOS">
+          <End Role="TIENDA" Type="Self.TIENDA" Multiplicity="1" />
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIENDA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="TIENDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PPRACTICAModelStoreContainer">
+          <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIENDA" EntityType="Self.TIENDA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PRODUCTOS" Association="Self.FK_PRODUCTOS">
+            <End Role="TIENDA" EntitySet="TIENDA" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PPRACTICAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PRODUCTOS">
+          <Key>
+            <PropertyRef Name="SKU" />
+          </Key>
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SKU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VALOR" Type="Int32" Nullable="false" />
+          <Property Name="TIENDA" Type="Int32" Nullable="false" />
+          <Property Name="IMAGEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TIENDA1" Relationship="Self.FK_PRODUCTOS" FromRole="PRODUCTOS" ToRole="TIENDA" />
+        </EntityType>
+        <EntityType Name="TIENDA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHADEAPERTURA" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK_PRODUCTOS" FromRole="TIENDA" ToRole="PRODUCTOS" />
+        </EntityType>
+        <Association Name="FK_PRODUCTOS">
+          <End Role="TIENDA" Type="Self.TIENDA" Multiplicity="1" />
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIENDA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="TIENDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PPRACTICAEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" />
+          <EntitySet Name="TIENDA" EntityType="Self.TIENDA" />
+          <AssociationSet Name="FK_PRODUCTOS" Association="Self.FK_PRODUCTOS">
+            <End Role="TIENDA" EntitySet="TIENDA" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PPRACTICAModelStoreContainer" CdmEntityContainer="PPRACTICAEntities2">
+          <EntitySetMapping Name="PRODUCTOS">
+            <EntityTypeMapping TypeName="PPRACTICAModel.PRODUCTOS">
+              <MappingFragment StoreEntitySet="PRODUCTOS">
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="TIENDA" ColumnName="TIENDA" />
+                <ScalarProperty Name="IMAGEN" ColumnName="IMAGEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIENDA">
+            <EntityTypeMapping TypeName="PPRACTICAModel.TIENDA">
+              <MappingFragment StoreEntitySet="TIENDA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="FECHADEAPERTURA" ColumnName="FECHADEAPERTURA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

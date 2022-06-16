@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PPRACTICAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="PRODUCTOS">
+    <Key>
+      <PropertyRef Name="SKU" />
+    </Key>
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SKU" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VALOR" Type="int" Nullable="false" />
+    <Property Name="TIENDA" Type="int" Nullable="false" />
+    <Property Name="IMAGEN" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TIENDA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FECHADEAPERTURA" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_PRODUCTOS">
+    <End Role="TIENDA" Type="Self.TIENDA" Multiplicity="1" />
+    <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIENDA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRODUCTOS">
+        <PropertyRef Name="TIENDA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PPRACTICAModelStoreContainer">
+    <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TIENDA" EntityType="Self.TIENDA" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_PRODUCTOS" Association="Self.FK_PRODUCTOS">
+      <End Role="TIENDA" EntitySet="TIENDA" />
+      <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

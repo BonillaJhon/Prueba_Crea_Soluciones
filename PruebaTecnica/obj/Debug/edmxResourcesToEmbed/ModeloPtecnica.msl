@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PPRACTICAModelStoreContainer" CdmEntityContainer="PPRACTICAEntities1">
+    <EntitySetMapping Name="PRODUCTOS">
+      <EntityTypeMapping TypeName="PPRACTICAModel.PRODUCTOS">
+        <MappingFragment StoreEntitySet="PRODUCTOS">
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="SKU" ColumnName="SKU" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+          <ScalarProperty Name="TIENDA" ColumnName="TIENDA" />
+          <ScalarProperty Name="IMAGEN" ColumnName="IMAGEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIENDA">
+      <EntityTypeMapping TypeName="PPRACTICAModel.TIENDA">
+        <MappingFragment StoreEntitySet="TIENDA">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="FECHADEAPERTURA" ColumnName="FECHADEAPERTURA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
